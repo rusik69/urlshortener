@@ -1,0 +1,18 @@
+package server
+
+import (
+	"log"
+
+	"github.com/gin-gonic/gin"
+	"github.com/rusik69/urlshortener/pkg/env"
+)
+
+// Serve registers starts the server.
+func Serve(config env.Config) {
+	router := gin.Default()
+	router.LoadHTMLGlob("web/templates/*")
+	router.GET("/", rootHandler)
+	router.POST("/shorten", shortenHandler)
+	router.GET("/:shortURL", redirectHandler)
+	log.Fatal(router.Run(config.ListenHost + ":" + config.ListenPort))
+}
