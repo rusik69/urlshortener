@@ -39,11 +39,11 @@ func Parse() Config {
 	return Config{
 		ListenPort: listenPort,
 		ListenHost: listenHost,
-		DbHost:     dbHost,
-		DbPort:     dbPort,
-		DbUser:     dbUser,
-		DbPassword: dbPassword,
-		DbName:     dbName,
+		DBHost:     dbHost,
+		DBPort:     dbPort,
+		DBUser:     dbUser,
+		DBPassword: dbPassword,
+		DBName:     dbName,
 		DBSSLMode:  dbSSLMode,
 	}
 }

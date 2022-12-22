@@ -29,5 +29,4 @@ func TestParse(t *testing.T) {
 	if config.DBSSLMode != "disable" {
 		t.Errorf("Expected dbSSLMode to be disable, got %s", config.DBSSLMode)
 	}
-
 }

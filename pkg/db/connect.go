@@ -12,7 +12,8 @@ import (
 func Connect(config env.Config) (*sql.DB, error) {
 	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s "+
 		"password=%s dbname=%s sslmode=%s",
-		config.DbHost, config.DbPort, config.DbUser, config.DbPassword, config.DbName)
+		config.DBHost, config.DBPort, config.DBUser,
+		config.DBPassword, config.DBName, config.DBSSLMode)
 	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
 		return nil, err
