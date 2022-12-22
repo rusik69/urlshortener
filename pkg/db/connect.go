@@ -17,5 +17,9 @@ func Connect(config env.Config) (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
+	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
 	return db, nil
 }

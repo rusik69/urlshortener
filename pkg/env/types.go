@@ -4,10 +4,10 @@ package env
 type Config struct {
 	ListenPort string
 	ListenHost string
-	DbHost     string
-	DbPort     string
-	DbUser     string
-	DbPassword string
-	DbName     string
+	DBHost     string
+	DBPort     string
+	DBUser     string
+	DBPassword string
+	DBName     string
 	DBSSLMode  string
 }
