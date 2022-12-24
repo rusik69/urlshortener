@@ -29,4 +29,7 @@ func TestParse(t *testing.T) {
 	if config.DBSSLMode != "disable" {
 		t.Errorf("Expected dbSSLMode to be disable, got %s", config.DBSSLMode)
 	}
+	if config.DBTableName != "shortener" {
+		t.Errorf("Expected dbTableName to be shortener, got %s", config.DBTableName)
+	}
 }
