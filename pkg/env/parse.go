@@ -36,14 +36,19 @@ func Parse() Config {
 	if dbSSLMode == "" {
 		dbSSLMode = "disable"
 	}
+	dbTableName := os.Getenv("SHORTENER_DB_TABLE_NAME")
+	if dbTableName == "" {
+		dbTableName = "shortener"
+	}
 	return Config{
-		ListenPort: listenPort,
-		ListenHost: listenHost,
-		DBHost:     dbHost,
-		DBPort:     dbPort,
-		DBUser:     dbUser,
-		DBPassword: dbPassword,
-		DBName:     dbName,
-		DBSSLMode:  dbSSLMode,
+		ListenPort:  listenPort,
+		ListenHost:  listenHost,
+		DBHost:      dbHost,
+		DBPort:      dbPort,
+		DBUser:      dbUser,
+		DBPassword:  dbPassword,
+		DBName:      dbName,
+		DBSSLMode:   dbSSLMode,
+		DBTableName: dbTableName,
 	}
 }

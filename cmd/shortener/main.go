@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/rusik69/urlshortener/pkg/db"
+	"github.com/rusik69/urlshortener/pkg/database"
 	"github.com/rusik69/urlshortener/pkg/env"
 	"github.com/rusik69/urlshortener/pkg/server"
 )
 
 func main() {
 	config := env.Parse()
-	db, err := db.Connect(config)
+	db, err := database.Connect(config)
 	if err != nil {
 		panic(err)
 	}

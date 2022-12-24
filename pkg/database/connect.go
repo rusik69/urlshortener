@@ -1,4 +1,4 @@
-package db
+package database
 
 import (
 	"database/sql"
@@ -7,6 +7,8 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/rusik69/urlshortener/pkg/env"
 )
+
+var dbname string
 
 // Connect connects to the database.
 func Connect(config env.Config) (*sql.DB, error) {
@@ -20,7 +22,8 @@ func Connect(config env.Config) (*sql.DB, error) {
 	}
 	err = db.Ping()
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
+	dbname = config.DBName
 	return db, nil
 }
