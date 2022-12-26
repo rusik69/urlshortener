@@ -19,7 +19,10 @@ func Serve(config env.Config, db *sql.DB) {
 	router := gin.Default()
 	router.LoadHTMLGlob("web/templates/*")
 	router.GET("/", rootHandler)
-	router.POST("/shorten", shortenHandler)
-	// router.GET("/:shortURL", redirectHandler)
+	router.GET("/shorten", shortenHandler)
+	router.GET("/:shortURL", redirectHandler)
+	router.GET("favicon.ico", func(c *gin.Context) {
+		c.Status(404)
+	})
 	log.Fatal(router.Run(config.ListenHost + ":" + config.ListenPort))
 }

@@ -4,10 +4,12 @@ import (
 	"github.com/rusik69/urlshortener/pkg/database"
 	"github.com/rusik69/urlshortener/pkg/env"
 	"github.com/rusik69/urlshortener/pkg/server"
+	"github.com/sirupsen/logrus"
 )
 
 func main() {
 	config := env.Parse()
+	logrus.SetReportCaller(true)
 	db, err := database.Connect(config)
 	if err != nil {
 		panic(err)

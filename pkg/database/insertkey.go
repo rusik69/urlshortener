@@ -3,7 +3,6 @@ package database
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"time"
 )
 
@@ -11,8 +10,8 @@ import (
 func InsertKey(key, value string, db *sql.DB) error {
 	ctx, cancelfunc := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelfunc()
-	sqlStmt := fmt.Sprintf("INSERT INTO %s(key, url) VALUES(%s, %s)", dbname, key, value)
-	_, err := db.ExecContext(ctx, sqlStmt)
+	sqlStmt := "INSERT INTO $1(key, url) VALUES($2, $3);"
+	_, err := db.ExecContext(ctx, sqlStmt, tableName, key, value)
 	if err != nil {
 		return err
 	}

@@ -1,6 +1,10 @@
 package env
 
-import "os"
+import (
+	"os"
+
+	"github.com/sirupsen/logrus"
+)
 
 // Parse parses the environment variables and returnes the configuration.
 func Parse() Config {
@@ -40,6 +44,15 @@ func Parse() Config {
 	if dbTableName == "" {
 		dbTableName = "shortener"
 	}
+	logrus.Println("SHORTENER_LISTEN_PORT: ", listenPort)
+	logrus.Println("SHORTENER_LISTEN_HOST: ", listenHost)
+	logrus.Println("SHORTENER_DB_HOST: ", dbHost)
+	logrus.Println("SHORTENER_DB_PORT: ", dbPort)
+	logrus.Println("SHORTENER_DB_USER: ", dbUser)
+	logrus.Println("SHORTENER_DB_PASSWORD: ", dbPassword)
+	logrus.Println("SHORTENER_DB_NAME: ", dbName)
+	logrus.Println("SHORTENER_DB_SSLMODE: ", dbSSLMode)
+	logrus.Println("SHORTENER_DB_TABLE_NAME: ", dbTableName)
 	return Config{
 		ListenPort:  listenPort,
 		ListenHost:  listenHost,
