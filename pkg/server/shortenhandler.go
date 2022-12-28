@@ -19,5 +19,5 @@ func shortenHandler(c *gin.Context) {
 		c.HTML(500, "error.html", gin.H{"error": err.Error()})
 		return
 	}
-	c.HTML(200, "shorten.html", gin.H{"shortURL": key})
+	c.HTML(200, "shorten.html", gin.H{"shortURL": CONF.Host + "/" + key})
 }

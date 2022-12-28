@@ -16,6 +16,10 @@ func Parse() Config {
 	if listenHost == "" {
 		listenHost = "0.0.0.0"
 	}
+	host := os.Getenv("SHORTENER_HOST")
+	if host == "" {
+		host = "http://localhost:8080"
+	}
 	dbHost := os.Getenv("SHORTENER_DB_HOST")
 	if dbHost == "" {
 		dbHost = "localhost"
@@ -46,6 +50,7 @@ func Parse() Config {
 	}
 	logrus.Println("SHORTENER_LISTEN_PORT: ", listenPort)
 	logrus.Println("SHORTENER_LISTEN_HOST: ", listenHost)
+	logrus.Println("SHORTENER_HOST: ", host)
 	logrus.Println("SHORTENER_DB_HOST: ", dbHost)
 	logrus.Println("SHORTENER_DB_PORT: ", dbPort)
 	logrus.Println("SHORTENER_DB_USER: ", dbUser)
@@ -56,6 +61,7 @@ func Parse() Config {
 	return Config{
 		ListenPort:  listenPort,
 		ListenHost:  listenHost,
+		Host:        host,
 		DBHost:      dbHost,
 		DBPort:      dbPort,
 		DBUser:      dbUser,

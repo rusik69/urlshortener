@@ -4,6 +4,7 @@ package env
 type Config struct {
 	ListenPort  string
 	ListenHost  string
+	Host        string
 	DBHost      string
 	DBPort      string
 	DBUser      string

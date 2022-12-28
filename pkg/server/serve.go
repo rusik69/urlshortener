@@ -11,10 +11,12 @@ import (
 )
 
 var DB *sql.DB
+var CONF env.Config
 
 // Serve registers starts the server.
 func Serve(config env.Config, db *sql.DB) {
 	DB = db
+	CONF = config
 	rand.Seed(time.Now().UnixNano())
 	router := gin.Default()
 	router.LoadHTMLGlob("web/templates/*")
