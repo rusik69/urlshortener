@@ -16,5 +16,5 @@ func redirectHandler(c *gin.Context) {
 		c.HTML(500, "error.html", gin.H{"error": err.Error()})
 		return
 	}
-	http.RedirectHandler(url, http.StatusSeeOther)
+	c.Redirect(http.StatusMovedPermanently, url)
 }

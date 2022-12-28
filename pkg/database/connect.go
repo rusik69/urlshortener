@@ -38,6 +38,6 @@ func Connect(config env.Config) (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	tableName = config.DBName
+	tableName = config.DBTableName
 	return db, nil
 }
