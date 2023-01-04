@@ -1,0 +1,24 @@
+on: [push, pull_request]
+name: test
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: make uninstall
+      run: make uninstall
+    - name: make buildx
+      run: make buildx
+    - name: make install
+      run: make install
+    - name: make logs
+      run: make logs
+    - name: docker clean
+      run: docker system prune -a
+    timeout-minutes: 30

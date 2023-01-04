@@ -8,7 +8,22 @@ build:
 	CGO_ENABLED=0 GOARCH=arm64 GOOS=darwin go build -o bin/${BINARY_NAME}-darwin-arm64 cmd/${BINARY_NAME}/main.go
 	chmod +x bin/*
 
+buildx:
+	docker buildx build --platform="linux/arm/v7" -t loqutus/urlshortener:latest --push .
+	docker buildx build --platform="linux/arm/v7" -t loqutus/urlshortener-test:latest --push -f ./Dockerfile-test .
+	docker buildx build --platform="linux/arm64" -t loqutus/urlshortener:latest --push .
+	docker buildx build --platform="linux/arm64" -t loqutus/urlshortener-test:latest --push -f ./Dockerfile-test .
+	docker buildx build --platform="linux/amd64" -t loqutus/urlshortener:latest --push .
+	docker buildx build --platform="linux/amd64" -t loqutus/urlshortener-test:latest --push -f ./Dockerfile-test .
+
 get:
 	go mod tidy
+
+test:
+	go test -count=1 -v -bench ./
+
+install:
+	cd deployments/urlshortener && helm dependency build
+	helm install urlshortener ./deployments/urlshortener
 
 default: get build
