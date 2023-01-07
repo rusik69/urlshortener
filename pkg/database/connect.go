@@ -28,15 +28,28 @@ func Connect(config env.Config) (*sql.DB, error) {
 			config.DBPassword, config.DBName, config.DBSSLMode)
 	}
 	logrus.Println(psqlInfo)
-	db, err := sql.Open("postgres", psqlInfo)
-	if err != nil {
-		return nil, err
-	}
-	ctx, cancelfunc := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancelfunc()
-	err = db.PingContext(ctx)
-	if err != nil {
-		return nil, err
+	connectionFailed := false
+	var db *sql.DB
+	for i := 0; i < 10; i++ {
+		db, err := sql.Open("postgres", psqlInfo)
+		if err != nil {
+			connectionFailed = true
+			logrus.Println(err)
+			time.Sleep(1 * time.Second)
+			continue
+		}
+		ctx, cancelfunc := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancelfunc()
+		err = db.PingContext(ctx)
+		if err != nil {
+			connectionFailed = true
+			logrus.Println(err)
+			time.Sleep(1 * time.Second)
+			continue
+		}
+		if !connectionFailed {
+			break
+		}
 	}
 	tableName = config.DBTableName
 	return db, nil
