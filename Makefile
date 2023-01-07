@@ -23,6 +23,7 @@ install:
 	helm repo update
 	cd deployments/urlshortener && helm dependency build
 	helm install urlshortener ./deployments/urlshortener
+	helm test urlshortener
 
 uninstall:
 	helm uninstall urlshortener || true
