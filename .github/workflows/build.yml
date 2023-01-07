@@ -20,6 +20,8 @@ jobs:
       run: make buildx
     - name: install
       run: make install
+    - name: test
+      run: make helmtest
     - name: uninstall
       run: make uninstall
     - name: docker clean
