@@ -10,7 +10,9 @@ RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} \
     go build -o /go/bin/shortener cmd/shortener/main.go
 
 FROM alpine:latest
-WORKDIR /
-COPY --from=build-env /go/bin/shortener /usr/bin/shortener
-ENTRYPOINT ["/usr/bin/shortener"]
+WORKDIR /app
+COPY --from=build-env /go/bin/shortener /app/shortener
+COPY web /app/web
+
+ENTRYPOINT ["/app/shortener"]
 EXPOSE 8080

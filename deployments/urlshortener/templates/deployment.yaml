@@ -49,7 +49,9 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
             - name: SHORTENER_DB_HOST
-              value: {{ .Values.postgresql.service.name }}
+              value: {{ .Values.db.host }}
+            - name: SHORTENER_DB_PASSWORD
+              value: {{ .Values.db.password }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

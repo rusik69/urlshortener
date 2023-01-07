@@ -11,14 +11,17 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: make uninstall
+    - name: start minikube
+      id: minikube
+      uses: medyagh/setup-minikube@latest
+    - name: uninstall
       run: make uninstall
-    - name: make buildx
+    - name: buildx
       run: make buildx
-    - name: make install
+    - name: install
       run: make install
-    - name: make logs
-      run: make logs
+    - name: uninstall
+      run: make uninstall
     - name: docker clean
       run: docker system prune -a
     timeout-minutes: 30

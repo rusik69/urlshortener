@@ -34,7 +34,7 @@ func Parse() Config {
 	}
 	dbPassword := os.Getenv("SHORTENER_DB_PASSWORD")
 	if dbPassword == "" {
-		dbPassword = ""
+		dbPassword = "postgres"
 	}
 	dbName := os.Getenv("SHORTENER_DB_NAME")
 	if dbName == "" {
@@ -48,6 +48,7 @@ func Parse() Config {
 	if dbTableName == "" {
 		dbTableName = "shortener"
 	}
+
 	logrus.Println("SHORTENER_LISTEN_PORT: ", listenPort)
 	logrus.Println("SHORTENER_LISTEN_HOST: ", listenHost)
 	logrus.Println("SHORTENER_HOST: ", host)
@@ -58,6 +59,7 @@ func Parse() Config {
 	logrus.Println("SHORTENER_DB_NAME: ", dbName)
 	logrus.Println("SHORTENER_DB_SSLMODE: ", dbSSLMode)
 	logrus.Println("SHORTENER_DB_TABLE_NAME: ", dbTableName)
+
 	return Config{
 		ListenPort:  listenPort,
 		ListenHost:  listenHost,
