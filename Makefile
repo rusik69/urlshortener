@@ -19,10 +19,15 @@ test:
 	go test -count=1 -v -bench ./
 
 install:
+	hem repo add https://charts.bitnami.com/bitnami
 	cd deployments/urlshortener && helm dependency build
 	helm install urlshortener ./deployments/urlshortener
 
 uninstall:
 	helm uninstall urlshortener || true
+
+logs:
+	kubectl wait --timeout=300s --for=condition=complete job/urlshortener-test || kubectl logs job/urlshortener-test; exit 1
+	kubectl logs job/urlshortener-test
 
 default: get build
