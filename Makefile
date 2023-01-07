@@ -19,7 +19,8 @@ test:
 	go test -count=1 -v -bench ./
 
 install:
-	hem repo add https://charts.bitnami.com/bitnami
+	helm repo add https://charts.bitnami.com/bitnami
+	helm repo update
 	cd deployments/urlshortener && helm dependency build
 	helm install urlshortener ./deployments/urlshortener
 
