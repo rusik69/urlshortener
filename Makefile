@@ -9,10 +9,6 @@ build:
 	chmod +x bin/*
 
 buildx:
-	docker buildx build --platform="linux/arm/v7" -t loqutus/urlshortener:latest --push .
-	docker buildx build --platform="linux/arm/v7" -t loqutus/urlshortener-test:latest --push -f ./Dockerfile-test .
-	docker buildx build --platform="linux/arm64" -t loqutus/urlshortener:latest --push .
-	docker buildx build --platform="linux/arm64" -t loqutus/urlshortener-test:latest --push -f ./Dockerfile-test .
 	docker buildx build --platform="linux/amd64" -t loqutus/urlshortener:latest --push .
 	docker buildx build --platform="linux/amd64" -t loqutus/urlshortener-test:latest --push -f ./Dockerfile-test .
 
