@@ -91,3 +91,4 @@ postgresql:
     image:
       repository: postgres
       pullPolicy: Always
+      tag: "latest"
