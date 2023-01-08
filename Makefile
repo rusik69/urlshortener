@@ -9,8 +9,10 @@ build:
 	chmod +x bin/*
 
 buildx:
-	docker build -t loqutus/urlshortener:latest --push .
-	docker build -t loqutus/urlshortener-test:latest --push -f ./Dockerfile-test .
+	docker build -t loqutus/urlshortener:latest .
+	docker push loqutus/urlshortener:latest
+	docker build -t loqutus/urlshortener-test:latest -f ./Dockerfile-test .
+	docker push loqutus/urlshortener-test:latest
 
 get:
 	go mod tidy
