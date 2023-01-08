@@ -23,8 +23,8 @@ func TestParse(t *testing.T) {
 	if config.DBUser != "postgres" {
 		t.Errorf("Expected dbUser to be postgres, got %s", config.DBUser)
 	}
-	if config.DBPassword != "" {
-		t.Errorf("Expected dbPassword to be empty, got %s", config.DBPassword)
+	if config.DBPassword != "postgres" {
+		t.Errorf("Expected dbPassword to be postgres, got %s", config.DBPassword)
 	}
 	if config.DBName != "postgres" {
 		t.Errorf("Expected dbName to be postgres, got %s", config.DBName)

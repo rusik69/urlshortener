@@ -18,7 +18,7 @@ get:
 	go mod tidy
 
 test:
-	go test -count=1 -v -bench ./
+	go test ./...
 
 install:
 	helm repo add bitnami https://charts.bitnami.com/bitnami
