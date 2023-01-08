@@ -23,7 +23,7 @@ test:
 install:
 	helm repo add bitnami https://charts.bitnami.com/bitnami
 	cd deployments/urlshortener && helm dependency build
-	helm install urlshortener ./deployments/urlshortener
+	helm install --wait --timeout 1m urlshortener ./deployments/urlshortener
 
 helmtest:
 	cd deployments/urlshortener
