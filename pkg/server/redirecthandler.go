@@ -13,7 +13,8 @@ func redirectHandler(c *gin.Context) {
 	key := strings.Split(c.Request.URL.Path, "/")[1]
 	url, err := database.GetKey(key)
 	if err != nil {
-		c.HTML(500, "error.html", gin.H{"error": err.Error()})
+		c.Writer.WriteHeader(500)
+		c.Writer.Write([]byte(err.Error()))
 		return
 	}
 	c.Redirect(http.StatusMovedPermanently, url)

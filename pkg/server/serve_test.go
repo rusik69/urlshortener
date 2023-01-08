@@ -1,7 +1,9 @@
 package server
 
 import (
+	"io"
 	"net/http"
+	"strings"
 	"testing"
 )
 
@@ -15,6 +17,35 @@ func TestServe(t *testing.T) {
 		}
 		if resp.StatusCode != 200 {
 			t.Errorf("Expected status code to be 200, got %d", resp.StatusCode)
+		}
+	})
+	var key string
+	t.Run("ShortenTest", func(t *testing.T) {
+		resp, err := http.Get(host + "shorten?url=https://google.com")
+		if err != nil {
+			t.Errorf("Error: %s", err.Error())
+		}
+		if resp.StatusCode != 200 {
+			t.Errorf("Expected status code to be 200, got %d", resp.StatusCode)
+		}
+		keySplitBody, err := io.ReadAll(resp.Body)
+		if err != nil {
+			t.Errorf("Error: %s", err.Error())
+		}
+		keySplit := strings.Split(string(keySplitBody), "/")
+		key = keySplit[len(keySplit)-1]
+		if len(key) != 6 {
+			t.Errorf("Expected key to be 6 characters, got %d", len(key))
+			t.Errorf("Key: %s", key)
+		}
+	})
+	t.Run("RedirectTest", func(t *testing.T) {
+		resp, err := http.Get(host + "key")
+		if err != nil {
+			t.Errorf("Error: %s", err.Error())
+		}
+		if resp.StatusCode != http.StatusMovedPermanently {
+			t.Errorf("Expected status code to be 301, got %d", resp.StatusCode)
 		}
 	})
 }

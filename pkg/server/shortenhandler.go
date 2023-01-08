@@ -10,15 +10,18 @@ import (
 func shortenHandler(c *gin.Context) {
 	url := c.Query("url")
 	if url == "" {
-		c.HTML(400, "error.html", gin.H{"error": "no url provided"})
+		c.Writer.WriteHeader(400)
+		c.Writer.Write([]byte("no url provided"))
 		return
 	}
 	key := generateKey()
 	logrus.Println("add", key, url)
 	err := saveURL(url, key)
 	if err != nil {
-		c.HTML(500, "error.html", gin.H{"error": err.Error()})
+		c.Writer.WriteHeader(500)
+		c.Writer.Write([]byte(err.Error()))
 		return
 	}
-	c.HTML(200, "shorten.html", gin.H{"shortURL": env.ConfigInstance.Host + "/" + key})
+	c.Writer.WriteHeader(200)
+	c.Writer.Write([]byte(env.ConfigInstance.Host + "/" + key))
 }
