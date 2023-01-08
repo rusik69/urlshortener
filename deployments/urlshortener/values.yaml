@@ -8,7 +8,7 @@ image:
   repository: loqutus/urlshortener
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -88,3 +88,6 @@ db:
 postgresql:
     auth:
       postgresPassword: "postgres"
+    image:
+      repository: postgres
+      pullPolicy: Always
