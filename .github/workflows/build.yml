@@ -23,4 +23,4 @@ jobs:
       run: make uninstall
     - name: docker clean
       run: docker system prune -a
-    timeout-minutes: 30
+    timeout-minutes: 10
