@@ -27,7 +27,8 @@ install:
 
 helmtest:
 	cd deployments/urlshortener
-	helm test urlshortener
+	helm test --logs urlshortener
+
 
 uninstall:
 	helm uninstall urlshortener || true
