@@ -8,16 +8,15 @@ import (
 )
 
 func main() {
-	config := env.Parse()
+	env.Parse()
 	logrus.SetReportCaller(true)
-	db, err := database.Connect(config)
+	err := database.Connect()
 	if err != nil {
 		panic(err)
 	}
-	defer db.Close()
-	err = database.Init(db)
+	err = database.Init()
 	if err != nil {
 		panic(err)
 	}
-	server.Serve(config, db)
+	server.Serve()
 }

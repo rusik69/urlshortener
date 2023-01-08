@@ -13,3 +13,6 @@ type Config struct {
 	DBTableName string
 	DBSSLMode   string
 }
+
+// ConfigInstance is the instance of the Config struct.
+var ConfigInstance Config

@@ -11,7 +11,7 @@ import (
 // redirectHandler is the handler for the redirect path.
 func redirectHandler(c *gin.Context) {
 	key := strings.Split(c.Request.URL.Path, "/")[1]
-	url, err := database.GetKey(key, DB)
+	url, err := database.GetKey(key)
 	if err != nil {
 		c.HTML(500, "error.html", gin.H{"error": err.Error()})
 		return

@@ -1,5 +1,5 @@
 package database
 
-import "github.com/rusik69/urlshortener/pkg/env"
+import "database/sql"
 
-var dbConfig env.Config
+var DB *sql.DB

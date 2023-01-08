@@ -7,7 +7,7 @@ import (
 )
 
 // Parse parses the environment variables and returnes the configuration.
-func Parse() Config {
+func Parse() {
 	listenPort := os.Getenv("SHORTENER_LISTEN_PORT")
 	if listenPort == "" {
 		listenPort = "8080"
@@ -60,7 +60,7 @@ func Parse() Config {
 	logrus.Println("SHORTENER_DB_SSLMODE: ", dbSSLMode)
 	logrus.Println("SHORTENER_DB_TABLE_NAME: ", dbTableName)
 
-	return Config{
+	ConfigInstance = Config{
 		ListenPort:  listenPort,
 		ListenHost:  listenHost,
 		Host:        host,

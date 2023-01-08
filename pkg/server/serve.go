@@ -1,7 +1,6 @@
 package server
 
 import (
-	"database/sql"
 	"log"
 	"math/rand"
 	"time"
@@ -10,13 +9,8 @@ import (
 	"github.com/rusik69/urlshortener/pkg/env"
 )
 
-var DB *sql.DB
-var CONF env.Config
-
 // Serve registers starts the server.
-func Serve(config env.Config, db *sql.DB) {
-	DB = db
-	CONF = config
+func Serve() {
 	rand.Seed(time.Now().UnixNano())
 	router := gin.Default()
 	router.LoadHTMLGlob("web/templates/*")
@@ -29,5 +23,5 @@ func Serve(config env.Config, db *sql.DB) {
 	router.GET("/ping", func(c *gin.Context) {
 		c.String(200, "pong")
 	})
-	log.Fatal(router.Run(config.ListenHost + ":" + config.ListenPort))
+	log.Fatal(router.Run(env.ConfigInstance.ListenHost + ":" + env.ConfigInstance.ListenPort))
 }

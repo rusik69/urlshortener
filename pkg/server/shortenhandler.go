@@ -2,6 +2,7 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/rusik69/urlshortener/pkg/env"
 	"github.com/sirupsen/logrus"
 )
 
@@ -19,5 +20,5 @@ func shortenHandler(c *gin.Context) {
 		c.HTML(500, "error.html", gin.H{"error": err.Error()})
 		return
 	}
-	c.HTML(200, "shorten.html", gin.H{"shortURL": CONF.Host + "/" + key})
+	c.HTML(200, "shorten.html", gin.H{"shortURL": env.ConfigInstance.Host + "/" + key})
 }
