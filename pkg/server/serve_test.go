@@ -7,7 +7,7 @@ import (
 
 // TestServe is a test for the Serve function.
 func TestServe(t *testing.T) {
-	host := "https://urlshortener:8080/"
+	host := "http://urlshortener:8080/"
 	t.Run("RootTest", func(t *testing.T) {
 		resp, err := http.Get(host)
 		if err != nil {
