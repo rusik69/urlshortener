@@ -6,6 +6,7 @@ import (
 
 // TestParse tests the Parse function.
 func TestParse(t *testing.T) {
+	Parse()
 	if ConfigInstance.ListenPort != "8080" {
 		t.Errorf("Expected listenPort to be 8080, got %s", ConfigInstance.ListenPort)
 	}
