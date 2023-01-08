@@ -11,46 +11,33 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-var tableName string
-
 // Connect connects to the database.
 func Connect(config env.Config) (*sql.DB, error) {
 	var psqlInfo string
 	if config.DBPassword == "" {
 		psqlInfo = fmt.Sprintf("host=%s port=%s user=%s "+
-			"dbname=%s sslmode=%s",
+			"dbname=%s sslmode=%s connect_timeout=60",
 			config.DBHost, config.DBPort, config.DBUser,
 			config.DBName, config.DBSSLMode)
 	} else {
 		psqlInfo = fmt.Sprintf("host=%s port=%s user=%s "+
-			"password=%s dbname=%s sslmode=%s",
+			"password=%s dbname=%s sslmode=%s connect_timeout=60",
 			config.DBHost, config.DBPort, config.DBUser,
 			config.DBPassword, config.DBName, config.DBSSLMode)
 	}
 	logrus.Println(psqlInfo)
-	connectionFailed := false
-	var db *sql.DB
-	for i := 0; i < 10; i++ {
-		db, err := sql.Open("postgres", psqlInfo)
-		if err != nil {
-			connectionFailed = true
-			logrus.Println(err)
-			time.Sleep(1 * time.Second)
-			continue
-		}
-		ctx, cancelfunc := context.WithTimeout(context.Background(), 5*time.Second)
-		defer cancelfunc()
-		err = db.PingContext(ctx)
-		if err != nil {
-			connectionFailed = true
-			logrus.Println(err)
-			time.Sleep(1 * time.Second)
-			continue
-		}
-		if !connectionFailed {
-			break
-		}
+	db, err := sql.Open("postgres", psqlInfo)
+	if err != nil {
+		logrus.Println("Error opening database")
+		return nil, err
 	}
-	tableName = config.DBTableName
+	ctx, cancelfunc := context.WithTimeout(context.Background(), 60*time.Second)
+	defer cancelfunc()
+	err = db.PingContext(ctx)
+	if err != nil {
+		logrus.Println("Error pinging database")
+		return nil, err
+	}
+	dbConfig = config
 	return db, nil
 }

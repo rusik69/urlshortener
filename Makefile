@@ -9,8 +9,8 @@ build:
 	chmod +x bin/*
 
 buildx:
-	docker buildx build --platform="linux/amd64" -t loqutus/urlshortener:latest --push .
-	docker buildx build --platform="linux/amd64" -t loqutus/urlshortener-test:latest --push -f ./Dockerfile-test .
+	docker build -t loqutus/urlshortener:latest --push .
+	docker build -t loqutus/urlshortener-test:latest --push -f ./Dockerfile-test .
 
 get:
 	go mod tidy
@@ -20,7 +20,6 @@ test:
 
 install:
 	helm repo add bitnami https://charts.bitnami.com/bitnami
-	helm repo update
 	cd deployments/urlshortener && helm dependency build
 	helm install urlshortener ./deployments/urlshortener
 

@@ -11,7 +11,7 @@ import (
 func GetKey(key string, db *sql.DB) (string, error) {
 	ctx, cancelfunc := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelfunc()
-	sqlStmt := fmt.Sprintf("SELECT url FROM %s WHERE key=$1;", tableName)
+	sqlStmt := fmt.Sprintf("SELECT url FROM %s WHERE key=$1;", dbConfig.DBTableName)
 	err := db.QueryRowContext(ctx, sqlStmt, key).Scan(&key)
 	if err != nil {
 		if err != sql.ErrNoRows {

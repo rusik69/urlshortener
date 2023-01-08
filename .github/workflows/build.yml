@@ -2,7 +2,7 @@ on: [push, pull_request]
 name: test
 jobs:
   test:
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -11,9 +11,6 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: start minikube
-      id: minikube
-      uses: medyagh/setup-minikube@latest
     - name: uninstall
       run: make uninstall
     - name: buildx
