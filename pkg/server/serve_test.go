@@ -35,8 +35,8 @@ func TestServe(t *testing.T) {
 		keySplit := strings.Split(string(keySplitBody), "/")
 		key = keySplit[len(keySplit)-1]
 		if len(key) != 6 {
+			t.Logf("Key: %s\n", key)
 			t.Errorf("Expected key to be 6 characters, got %d", len(key))
-			t.Errorf("Key: %s", key)
 		}
 	})
 	t.Run("RedirectTest", func(t *testing.T) {
@@ -44,7 +44,12 @@ func TestServe(t *testing.T) {
 		if err != nil {
 			t.Errorf("Error: %s", err.Error())
 		}
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			t.Errorf("Error: %s", err.Error())
+		}
 		if resp.StatusCode != http.StatusMovedPermanently {
+			t.Logf("Body: %s\n", string(body))
 			t.Errorf("Expected status code to be 301, got %d", resp.StatusCode)
 		}
 	})
