@@ -40,7 +40,7 @@ func TestServe(t *testing.T) {
 		}
 	})
 	t.Run("RedirectTest", func(t *testing.T) {
-		resp, err := http.Get(host + "key")
+		resp, err := http.Get(host + key)
 		if err != nil {
 			t.Errorf("Error: %s", err.Error())
 		}
