@@ -41,8 +41,7 @@ func TestServe(t *testing.T) {
 	})
 	t.Run("RedirectTest", func(t *testing.T) {
 		url := host + key
-		t.Logf("URL: %s\n", url)
-		resp, err := http.Get(host + key)
+		resp, err := http.Get(url)
 		if err != nil {
 			t.Errorf("Error: %s", err.Error())
 		}
@@ -51,6 +50,7 @@ func TestServe(t *testing.T) {
 			t.Errorf("Error: %s", err.Error())
 		}
 		if resp.StatusCode != http.StatusMovedPermanently {
+			t.Logf("URL: %s\n", url)
 			t.Logf("Body: %s\n", string(body))
 			t.Errorf("Expected status code to be 301, got %d", resp.StatusCode)
 		}
