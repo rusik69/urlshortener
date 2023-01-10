@@ -40,6 +40,8 @@ func TestServe(t *testing.T) {
 		}
 	})
 	t.Run("RedirectTest", func(t *testing.T) {
+		url := host + key
+		t.Logf("URL: %s\n", url)
 		resp, err := http.Get(host + key)
 		if err != nil {
 			t.Errorf("Error: %s", err.Error())
