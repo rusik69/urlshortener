@@ -6,6 +6,7 @@ replicaCount: 3
 
 image:
   repository: loqutus/urlshortener
+  testRepository: loqutus/urlshortener-test
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"

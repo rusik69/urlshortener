@@ -10,6 +10,6 @@ metadata:
 spec:
   containers:
   - name: urlshortener-test
-    image: loqutus/urlshortener-test:latest
+    image: {{ .Values.image.testRepository }}:latest
     imagePullPolicy: Always
   restartPolicy: Never
