@@ -6,7 +6,6 @@ metadata:
     {{- include "urlshortener.labels" . | nindent 4 }}
   annotations:
     "helm.sh/hook": test
-    #"helm.sh/hook-delete-policy": before-hook-creation
 spec:
   containers:
   - name: urlshortener-test
