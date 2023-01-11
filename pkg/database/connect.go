@@ -26,16 +26,27 @@ func Connect() error {
 			env.ConfigInstance.DBPassword, env.ConfigInstance.DBName, env.ConfigInstance.DBSSLMode)
 	}
 	logrus.Println(psqlInfo)
-	db, err := sql.Open("postgres", psqlInfo)
-	if err != nil {
-		logrus.Println("Error opening database")
-		return err
+	success := false
+	var db *sql.DB
+	var err error
+	for i := 1; i <= 10; i++ {
+		db, err = sql.Open("postgres", psqlInfo)
+		if err != nil {
+			logrus.Println("Error opening database connection, retrying")
+			time.Sleep(5 * time.Second)
+			continue
+		}
+		ctx, cancelfunc := context.WithTimeout(context.Background(), 60*time.Second)
+		defer cancelfunc()
+		err = db.PingContext(ctx)
+		if err != nil {
+			logrus.Println("Error pinging database, retrying")
+			time.Sleep(5 * time.Second)
+			continue
+		}
+		success = true
 	}
-	ctx, cancelfunc := context.WithTimeout(context.Background(), 60*time.Second)
-	defer cancelfunc()
-	err = db.PingContext(ctx)
-	if err != nil {
-		logrus.Println("Error pinging database")
+	if !success {
 		return err
 	}
 	DB = db
