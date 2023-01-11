@@ -47,6 +47,7 @@ func Connect() error {
 		success = true
 	}
 	if !success {
+		fmt.Println("Reached max retries, exiting")
 		return err
 	}
 	DB = db
