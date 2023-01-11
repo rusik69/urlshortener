@@ -9,6 +9,6 @@ metadata:
 spec:
   containers:
   - name: urlshortener-test
-    image: {{ .Values.image.testRepository }}:latest
+    image: {{ .Values.image.testRepository }}:{{ .Values.image.tag }}
     imagePullPolicy: Always
   restartPolicy: Never
