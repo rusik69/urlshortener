@@ -28,7 +28,7 @@ install:
 helmtest:
 	cd deployments/urlshortener
 	helm test urlshortener
-
+	kubectl logs urlshortener-test
 
 uninstall:
 	helm uninstall urlshortener || true

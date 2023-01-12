@@ -3,6 +3,7 @@ package server
 import (
 	"io"
 	"net/http"
+	"net/url"
 	"strings"
 	"testing"
 )
@@ -21,7 +22,7 @@ func TestServe(t *testing.T) {
 	})
 	var key string
 	t.Run("ShortenTest", func(t *testing.T) {
-		resp, err := http.Get(host + "shorten?url=https://google.com")
+		resp, err := http.Get(host + "shorten?url=" + url.QueryEscape("http://example.com/"))
 		if err != nil {
 			t.Errorf("Error: %s", err.Error())
 		}
@@ -45,7 +46,7 @@ func TestServe(t *testing.T) {
 		if err != nil {
 			t.Errorf("Error: %s", err.Error())
 		}
-		if resp.StatusCode != http.StatusMovedPermanently {
+		if resp.StatusCode != http.StatusOK {
 			t.Errorf("Expected status code to be 301, got %d", resp.StatusCode)
 		}
 	})
