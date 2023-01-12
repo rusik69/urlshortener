@@ -47,7 +47,7 @@ func TestServe(t *testing.T) {
 			t.Errorf("Error: %s", err.Error())
 		}
 		if resp.StatusCode != http.StatusOK {
-			t.Errorf("Expected status code to be 301, got %d", resp.StatusCode)
+			t.Errorf("Expected status code to be 200, got %d", resp.StatusCode)
 		}
 	})
 }
