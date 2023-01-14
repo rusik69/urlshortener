@@ -48,7 +48,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: shortener.rusik69.xyz
+    - host: urlshortener.rusik69.xyz
       paths:
         - path: /
           pathType: ImplementationSpecific
