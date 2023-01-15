@@ -21,7 +21,6 @@ jobs:
       run: make helmtest
     - name: uninstall
       run: make uninstall
-    - name: 
     - name: docker clean
       run: docker system prune -a
     timeout-minutes: 10
