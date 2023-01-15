@@ -52,6 +52,8 @@ spec:
               value: {{ .Values.db.host }}
             - name: SHORTENER_DB_PASSWORD
               value: {{ .Values.db.password }}
+            - name: SHORTENER_HOST
+              value: {{ .Values.host }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
