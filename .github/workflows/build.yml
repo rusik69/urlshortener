@@ -19,8 +19,8 @@ jobs:
       run: make install
     - name: test
       run: make helmtest
-    - name: uninstall
-      run: make uninstall
+    - name: prodinstall
+      run: make prodinstall
     - name: docker clean
       run: docker system prune -a
     timeout-minutes: 10

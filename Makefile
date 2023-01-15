@@ -25,6 +25,10 @@ install:
 	cd deployments/urlshortener && helm dependency build
 	helm install -n test --wait --timeout 2m urlshortener ./deployments/urlshortener
 
+prodinstall:
+	cd deployments/urlshortener
+	helm install -n prod --wait --timeout 2m --set host=http://urlshortener.rusik69.xyz/ urlshortener ./deployments/urlshortener
+
 helmtest:
 	cd deployments/urlshortener
 	helm test -n test urlshortener
