@@ -27,7 +27,7 @@ install:
 
 prodinstall:
 	cd deployments/urlshortener
-	helm install -n prod --wait --timeout 2m --set host=http://urlshortener.rusik69.xyz/ urlshortener ./deployments/urlshortener
+	helm install -n prod --wait --timeout 2m --set host=http://urlshortener.rusik69.xyz/ --set ingress.hosts[0].host=urlshortener.rusik69.xyz urlshortener ./deployments/urlshortener
 
 helmtest:
 	cd deployments/urlshortener
