@@ -26,8 +26,7 @@ install:
 	helm install -n test --wait --timeout 2m urlshortener ./deployments/urlshortener
 
 prodinstall:
-	cd deployments/urlshortener
-	helm install -n prod --wait --timeout 2m --values values-prod.yaml urlshortener ./deployments/urlshortener
+	helm install -n prod --wait --timeout 2m --values ./deployments/urlshortener/values-prod.yaml urlshortener ./deployments/urlshortener
 
 helmtest:
 	cd deployments/urlshortener
