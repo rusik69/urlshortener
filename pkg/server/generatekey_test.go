@@ -6,6 +6,6 @@ import "testing"
 func TestGenerateKey(t *testing.T) {
 	key := generateKey()
 	if len(key) != 8 {
-		t.Errorf("generateKey() = %s; want 6 characters", key)
+		t.Errorf("generateKey() = %s; want 8 characters", key)
 	}
 }
