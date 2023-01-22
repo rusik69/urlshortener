@@ -23,5 +23,5 @@ func shortenHandler(c *gin.Context) {
 		return
 	}
 	c.Writer.WriteHeader(200)
-	c.Writer.Write([]byte(env.ConfigInstance.Host + "/" + key))
+	c.Writer.Write([]byte(env.ConfigInstance.Host + key))
 }
