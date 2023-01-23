@@ -14,6 +14,7 @@ func TestDB(t *testing.T) {
 	env.ConfigInstance.DBUser = "postgres"
 	env.ConfigInstance.DBName = "postgres"
 	env.ConfigInstance.DBSSLMode = "disable"
+	env.ConfigInstance.DBTableName = "urlshortener"
 	t.Run("ConnectTest", func(t *testing.T) {
 		err := Connect()
 		if err != nil {
