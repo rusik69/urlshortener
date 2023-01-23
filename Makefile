@@ -35,6 +35,9 @@ helmtest:
 uninstall:
 	helm uninstall urlshortener -n test || true
 
+clean:
+	docker system prune -a -f
+
 logs:
 	kubectl wait -n test --timeout=300s --for=condition=complete job/urlshortener-test || kubectl logs -n test job/urlshortener-test; exit 1
 	kubectl logs -n test job/urlshortener-test

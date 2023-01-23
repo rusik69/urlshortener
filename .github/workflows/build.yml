@@ -22,5 +22,6 @@ jobs:
     - name: prodinstall
       run: make prodinstall
     - name: docker clean
-      run: docker system prune -a
+      run: make clean
+      if: always()
     timeout-minutes: 10
