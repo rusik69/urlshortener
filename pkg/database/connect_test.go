@@ -13,6 +13,7 @@ func TestDB(t *testing.T) {
 	env.ConfigInstance.DBPassword = "postgres"
 	env.ConfigInstance.DBUser = "postgres"
 	env.ConfigInstance.DBName = "postgres"
+	env.ConfigInstance.DBSSLMode = "disable"
 	t.Run("ConnectTest", func(t *testing.T) {
 		err := Connect()
 		if err != nil {
