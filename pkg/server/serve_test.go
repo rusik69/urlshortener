@@ -35,9 +35,9 @@ func TestServe(t *testing.T) {
 		}
 		keySplit := strings.Split(string(keySplitBody), "/")
 		key = keySplit[len(keySplit)-1]
-		if len(key) != 6 {
+		if len(key) != 8 {
 			t.Logf("Key: %s\n", key)
-			t.Errorf("Expected key to be 6 characters, got %d", len(key))
+			t.Errorf("Expected key to be 8 characters, got %d", len(key))
 		}
 	})
 	t.Run("RedirectTest", func(t *testing.T) {
