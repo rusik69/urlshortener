@@ -1,9 +1,17 @@
 package database
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/rusik69/urlshortener/pkg/env"
+)
 
 // TestConnect tests the connection to the database
 func TestDB(t *testing.T) {
+	env.ConfigInstance.DBHost = "postgres"
+	env.ConfigInstance.DBPort = "5432"
+	env.ConfigInstance.DBPassword = "postgres"
+	env.ConfigInstance.DBUser = "postgres"
 	t.Run("ConnectTest", func(t *testing.T) {
 		err := Connect()
 		if err != nil {
