@@ -30,7 +30,7 @@ prodinstall:
 
 helmtest:
 	cd deployments/urlshortener
-	helm test -n test urlshortener || kubectl logs -n test urlshortener-test
+	helm test -n test --logs urlshortener || kubectl logs -n test urlshortener-test
 
 uninstall:
 	helm uninstall urlshortener -n test || true
