@@ -1,10 +1,22 @@
 package database
 
 import (
+	"math/rand"
 	"testing"
 
 	"github.com/rusik69/urlshortener/pkg/env"
 )
+
+var letters = []rune("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+// generateKey generates a key.
+func generateKey() string {
+	b := make([]rune, 8)
+	for i := range b {
+		b[i] = letters[rand.Intn(len(letters))]
+	}
+	return string(b)
+}
 
 // TestConnect tests the connection to the database
 func TestDB(t *testing.T) {
@@ -27,14 +39,15 @@ func TestDB(t *testing.T) {
 			t.Errorf("Init() = %s; want no error", err)
 		}
 	})
+	key := generateKey()
 	t.Run("InsertKeyTest", func(t *testing.T) {
-		err := InsertKey("test", "test")
+		err := InsertKey(key, "test")
 		if err != nil {
 			t.Errorf("InsertKey() = %s; want no error", err)
 		}
 	})
 	t.Run("GetKeyTest", func(t *testing.T) {
-		url, err := GetKey("test")
+		url, err := GetKey(key)
 		if err != nil {
 			t.Errorf("GetKey() = %s; want no error", err)
 		}

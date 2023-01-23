@@ -6,7 +6,7 @@ import (
 
 var letters = []rune("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
-// generateKey generates a key for the given URL.
+// generateKey generates a key.
 func generateKey() string {
 	b := make([]rune, 8)
 	for i := range b {
