@@ -50,7 +50,8 @@ func TestDB(t *testing.T) {
 	})
 	t.Run("GetKeyTest", func(t *testing.T) {
 		url, err := GetKey(key)
-		t.Logf(key, url)
+		t.Logf(key)
+		t.Logf(url)
 		if err != nil {
 			t.Errorf("GetKey() = %s; want no error", err)
 		}
