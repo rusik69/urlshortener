@@ -15,11 +15,9 @@ func Init() error {
 	logrus.Println(sqlStmt)
 	ctx, cancelfunc := context.WithTimeout(context.Background(), 60*time.Second)
 	defer cancelfunc()
-	logrus.Println(sqlStmt)
-	res, err := DB.ExecContext(ctx, sqlStmt)
+	_, err := DB.ExecContext(ctx, sqlStmt)
 	if err != nil {
 		return err
 	}
-	logrus.Println(res)
 	return nil
 }
