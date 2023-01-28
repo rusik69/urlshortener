@@ -21,9 +21,9 @@ test:
 	go test -v ./...
 
 kubetest:
-	kubectl apply -n test -f ./deployments/test/pod.yaml
-	kubectl wait --for=condition=complete pod -l app=urlshortener-test -n test --timeout=300s
-	kubectl logs -n test -l app=urlshortener-test
+	kubectl apply -n test -f ./deployments/test/job.yaml
+	kubectl wait --for=condition=complete job urlshortener-test -n test --timeout=300s
+	kubectl logs jobs/urlshortener-test -n test
 
 upgrade-prod:
 	helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -31,7 +31,7 @@ upgrade-prod:
 	helm upgrade -n prod --wait --timeout 2m --values ./deployments/urlshortener/values.yaml urlshortener ./deployments/urlshortener
 
 uninstall-test:
-	kubectl delete -n test -f ./deployments/test/pod.yaml || true
+	kubectl delete -n test -f ./deployments/test/job.yaml || true
 
 clean:
 	docker system prune -a -f
