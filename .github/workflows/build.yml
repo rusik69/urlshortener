@@ -11,16 +11,14 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: uninstall
-      run: make uninstall
+    - name: uninstall-test
+      run: make uninstall-test
     - name: buildx
       run: make buildx
-    - name: install
-      run: make install
-    - name: test
-      run: make helmtest
-    - name: prodinstall
-      run: make prodinstall
+    - name: kubetest
+      run: make kubetest
+    - name: upgrade-prod
+      run: make upgrade-prod
     - name: docker clean
       run: make clean
       if: always()

@@ -20,20 +20,18 @@ get:
 test:
 	go test -v ./...
 
-install:
+kubetest:
+	kubectl apply -n test -f ./deployments/test/pod.yaml
+	kubectl wait --for=condition=ready pod -l app=urlshortener-test -n test --timeout=300s
+	kubectl logs -n test -l app=urlshortener-test
+
+upgrade-prod:
 	helm repo add bitnami https://charts.bitnami.com/bitnami
 	cd deployments/urlshortener && helm dependency build
-	helm install -n test --wait --timeout 2m urlshortener ./deployments/urlshortener
+	helm upgrade -n prod --wait --timeout 2m --values ./deployments/urlshortener/values.yaml urlshortener ./deployments/urlshortener
 
-prodinstall:
-	helm upgrade -n prod --wait --timeout 2m --values ./deployments/urlshortener/values-prod.yaml urlshortener ./deployments/urlshortener
-
-helmtest:
-	cd deployments/urlshortener
-	helm test -n test --logs urlshortener
-
-uninstall:
-	helm uninstall urlshortener -n test || true
+uninstall-test:
+	kubectl delete -n test -f ./deployments/test/pod.yaml || true
 
 clean:
 	docker system prune -a -f

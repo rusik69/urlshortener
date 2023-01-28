@@ -21,7 +21,7 @@ func generateKey() string {
 
 // TestConnect tests the connection to the database
 func TestDB(t *testing.T) {
-	env.ConfigInstance.DBHost = "urlshortener-postgresql"
+	env.ConfigInstance.DBHost = "postgres"
 	env.ConfigInstance.DBPort = "5432"
 	env.ConfigInstance.DBPassword = "postgres"
 	env.ConfigInstance.DBUser = "postgres"
