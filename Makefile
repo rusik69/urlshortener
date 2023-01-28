@@ -22,7 +22,7 @@ test:
 
 kubetest:
 	kubectl apply -n test -f ./deployments/test/pod.yaml
-	kubectl wait --for=condition=ready pod -l app=urlshortener-test -n test --timeout=300s
+	kubectl wait --for=condition=complete pod -l app=urlshortener-test -n test --timeout=300s
 	kubectl logs -n test -l app=urlshortener-test
 
 upgrade-prod:
