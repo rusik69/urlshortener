@@ -25,7 +25,7 @@ func TestDB(t *testing.T) {
 	env.ConfigInstance.DBPort = "5432"
 	env.ConfigInstance.DBPassword = "postgres"
 	env.ConfigInstance.DBUser = "postgres"
-	env.ConfigInstance.DBName = "postgres"
+	env.ConfigInstance.DBName = "urlshortener"
 	env.ConfigInstance.DBSSLMode = "disable"
 	env.ConfigInstance.DBTableName = "urlshortener"
 	rand.Seed(time.Now().UTC().UnixNano())

@@ -16,14 +16,14 @@ func Connect() error {
 	var psqlInfo string
 	if env.ConfigInstance.DBPassword == "" {
 		psqlInfo = fmt.Sprintf("host=%s port=%s user=%s "+
-			"dbname=%s sslmode=%s connect_timeout=60",
+			"sslmode=%s connect_timeout=60",
 			env.ConfigInstance.DBHost, env.ConfigInstance.DBPort, env.ConfigInstance.DBUser,
-			env.ConfigInstance.DBName, env.ConfigInstance.DBSSLMode)
+			env.ConfigInstance.DBSSLMode)
 	} else {
 		psqlInfo = fmt.Sprintf("host=%s port=%s user=%s "+
-			"password=%s dbname=%s sslmode=%s connect_timeout=60",
+			"password=%s sslmode=%s connect_timeout=60",
 			env.ConfigInstance.DBHost, env.ConfigInstance.DBPort, env.ConfigInstance.DBUser,
-			env.ConfigInstance.DBPassword, env.ConfigInstance.DBName, env.ConfigInstance.DBSSLMode)
+			env.ConfigInstance.DBPassword, env.ConfigInstance.DBSSLMode)
 	}
 	logrus.Println(psqlInfo)
 	success := false
