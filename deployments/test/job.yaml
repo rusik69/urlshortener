@@ -34,5 +34,5 @@ spec:
           - name: POSTGRES_DB
             value: urlshortener
         ports:
-            - containerPort: 5432
+          - containerPort: 5432
       restartPolicy: Never
