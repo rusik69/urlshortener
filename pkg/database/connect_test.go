@@ -27,7 +27,7 @@ func TestDB(t *testing.T) {
 	env.ConfigInstance.DBUser = "postgres"
 	env.ConfigInstance.DBName = "urlshortener"
 	env.ConfigInstance.DBSSLMode = "disable"
-	env.ConfigInstance.DBTableName = "shortener"
+	env.ConfigInstance.DBTableName = "urlshortener"
 	rand.Seed(time.Now().UTC().UnixNano())
 	t.Run("ConnectTest", func(t *testing.T) {
 		err := Connect()
