@@ -19,6 +19,9 @@ jobs:
       run: make kubetest
     - name: upgrade-prod
       run: make upgrade-prod
+    - name: logs
+      run: make logs
+      if: always()
     - name: docker clean
       run: make clean
       if: always()
