@@ -2,6 +2,7 @@ package env
 
 import (
 	"os"
+	"strconv"
 
 	"github.com/sirupsen/logrus"
 )
@@ -48,7 +49,16 @@ func Parse() {
 	if dbTableName == "" {
 		dbTableName = "shortener"
 	}
-
+	maxURLLength := os.Getenv("SHORTENER_MAX_URL_LENGTH")
+	if maxURLLength == "" {
+		maxURLLength = "1024"
+	}
+	maxURLLengthInt, err := strconv.Atoi(maxURLLength)
+	if err != nil {
+		logrus.Println("SHORTENER_MAX_URL_LENGTH is not a number. Using default value (1024).")
+		maxURLLengthInt = 1024
+	}
+	
 	logrus.Println("SHORTENER_LISTEN_PORT: ", listenPort)
 	logrus.Println("SHORTENER_LISTEN_HOST: ", listenHost)
 	logrus.Println("SHORTENER_HOST: ", host)
@@ -59,17 +69,19 @@ func Parse() {
 	logrus.Println("SHORTENER_DB_NAME: ", dbName)
 	logrus.Println("SHORTENER_DB_SSLMODE: ", dbSSLMode)
 	logrus.Println("SHORTENER_DB_TABLE_NAME: ", dbTableName)
+	logrus.Println("SHORTENER_MAX_URL_LENGTH: ", maxURLLength)
 
 	ConfigInstance = Config{
-		ListenPort:  listenPort,
-		ListenHost:  listenHost,
-		Host:        host,
-		DBHost:      dbHost,
-		DBPort:      dbPort,
-		DBUser:      dbUser,
-		DBPassword:  dbPassword,
-		DBName:      dbName,
-		DBSSLMode:   dbSSLMode,
-		DBTableName: dbTableName,
+		ListenPort:   listenPort,
+		ListenHost:   listenHost,
+		Host:         host,
+		DBHost:       dbHost,
+		DBPort:       dbPort,
+		DBUser:       dbUser,
+		DBPassword:   dbPassword,
+		DBName:       dbName,
+		DBSSLMode:    dbSSLMode,
+		DBTableName:  dbTableName,
+		MaxURLLength: maxURLLengthInt,
 	}
 }

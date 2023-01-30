@@ -13,6 +13,10 @@ func shortenHandler(c *gin.Context) {
 		c.Writer.WriteHeader(400)
 		c.Writer.Write([]byte("no url provided"))
 		return
+	} else if len(url) > env.ConfigInstance.MaxURLLength {
+		c.Writer.WriteHeader(400)
+		c.Writer.Write([]byte("url too long"))
+		return
 	}
 	key := generateKey()
 	logrus.Println("add", key, url)
