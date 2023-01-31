@@ -12,11 +12,11 @@ build:
 	chmod +x bin/*
 
 buildx:
-	docker build -t loqutus/urlshortener:$(GIT_TAG)-$(GIT_COMMIT)  .
-	docker push loqutus/urlshortener:$(GIT_TAG)-$(GIT_COMMIT)
-	docker build -t loqutus/urlshortener-test:$(GIT_TAG)-$(GIT_COMMIT) -f ./Dockerfile-test .
-	docker tag loqutus/urlshortener-test:$(GIT_TAG)-$(GIT_COMMIT) loqutus/urlshortener-test:latest
-	docker push loqutus/urlshortener-test::$(GIT_TAG)-$(GIT_COMMIT)
+	docker build -t loqutus/urlshortener:$(IMAGE_TAG)-$(GIT_COMMIT)  .
+	docker push loqutus/urlshortener:$(IMAGE_TAG)-$(GIT_COMMIT)
+	docker build -t loqutus/urlshortener-test:$(IMAGE_TAG)-$(GIT_COMMIT) -f ./Dockerfile-test .
+	docker tag loqutus/urlshortener-test:$(IMAGE_TAG)-$(GIT_COMMIT) loqutus/urlshortener-test:latest
+	docker push loqutus/urlshortener-test::$(IMAGE_TAG)-$(GIT_COMMIT)
 	docker push loqutus/urlshortener-test:latest
 
 get:
