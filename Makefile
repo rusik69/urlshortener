@@ -37,6 +37,7 @@ upgrade-prod:
 
 uninstall-test:
 	kubectl delete -n test -f ./deployments/test/job.yaml || true
+	kubectl delete -n test -f ./deployments/test/postgres.yaml || true
 
 clean:
 	docker system prune -a -f
