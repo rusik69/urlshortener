@@ -16,23 +16,4 @@ spec:
           limits:
             memory: "1024Mi"
             cpu: "1000m"
-      - name: postgres
-        image: "postgres:latest"
-        imagePullPolicy: Always
-        resources:
-          requests:
-            memory: "512Mi"
-            cpu: "100m"
-          limits:
-            memory: "1024Mi"
-            cpu: "1000m"
-        env:
-          - name: POSTGRES_USER
-            value: postgres
-          - name: POSTGRES_PASSWORD
-            value: postgres
-          - name: POSTGRES_DB
-            value: urlshortener
-        ports:
-          - containerPort: 5432
       restartPolicy: Never
