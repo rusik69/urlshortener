@@ -34,9 +34,9 @@ kubetest:
 	wait -n $completion_pid $failure_pid
 	exit_code=$?
 	if (( $exit_code == 0 )); then
-  		echo "Job completed"
+		echo "Job completed"
 	else
-  		echo "Job failed with exit code ${exit_code}, exiting..."
+		echo "Job failed with exit code ${exit_code}, exiting..."
 	fi
 	exit $exit_code
 
