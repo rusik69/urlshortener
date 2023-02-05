@@ -41,7 +41,7 @@ func Connect() error {
 		err = db.PingContext(ctx)
 		if err != nil {
 			logrus.Println("Error pinging database, retrying")
-			time.Sleep(5 * time.Second)
+			time.Sleep(1 * time.Second)
 			continue
 		}
 		success = true
