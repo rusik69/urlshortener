@@ -36,7 +36,7 @@ func Connect() error {
 			time.Sleep(5 * time.Second)
 			continue
 		}
-		ctx, cancelfunc := context.WithTimeout(context.Background(), 60*time.Second)
+		ctx, cancelfunc := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancelfunc()
 		err = db.PingContext(ctx)
 		if err != nil {

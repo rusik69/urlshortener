@@ -27,8 +27,18 @@ test:
 
 kubetest:
 	kubectl apply -n test -f ./deployments/test/job.yaml
-	kubectl wait --for=condition=complete --timeout=60s -n test job/urlshortener-test
-	status=$(kubectl get jobs urlshortener-test -n test -o jsonpath='{.status.conditions[?(@.type=="Complete")].status}'); if [ "$status" == "True" ]; then exit 0; else exit 1; fi	
+	kubectl wait --for=condition=complete job/urlshortener-test -n test &
+	completion_pid=$!
+	kubectl wait --for=condition=failed job/urlshortener-test -n test && exit 1 &
+	failure_pid=$! 
+	wait -n $completion_pid $failure_pid
+	exit_code=$?
+	if (( $exit_code == 0 )); then
+  		echo "Job completed"
+	else
+  		echo "Job failed with exit code ${exit_code}, exiting..."
+	fi
+	exit $exit_code
 
 upgrade-prod:
 	helm repo add bitnami https://charts.bitnami.com/bitnami
