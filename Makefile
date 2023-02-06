@@ -27,10 +27,7 @@ test:
 
 kubetest:
 	kubectl apply -n test -f ./deployments/test/job.yaml
-	while [ "$(kubectl get jobs/urlshortener-test -n test -o jsonpath='{.status.succeeded}')" != "1" ]; do
-		echo "Waiting for job to complete"
-		sleep 1 
-	done
+	while [ "$(kubectl get jobs/urlshortener-test -n test -o jsonpath='{.status.succeeded}')" != "1" ]; do echo "Waiting for job to complete"; sleep 1; done
 
 upgrade-prod:
 	helm repo add bitnami https://charts.bitnami.com/bitnami
